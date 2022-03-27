@@ -8,6 +8,7 @@
 	export let time = 0;
 	export let timeScale = 1;
 	export let weight = 1;
+	export let fadeDuration = 1;
 
 	const { root, parent } = setup();
 
@@ -15,16 +16,21 @@
 	const mixer = new THREE.AnimationMixer(parent);
 
 	/** @type {THREE.AnimationAction} */
+	let previousClip;
+	let previousAction;
 	let action;
-
 	$: {
-		action = mixer.clipAction(clip);
-		action.play();
-
+	    if (!previousClip || previousClip !== clip) {
+	    	previousClip = clip;
+			previousAction = action;
+	      	if (previousAction) previousAction.fadeOut(fadeDuration);
+			action = mixer.clipAction(clip);
+			action.reset().fadeIn(fadeDuration).play();
+	    }
 		// TODO uncache stuff
 	}
 
-	$: {
+	$: if(action){
 		action.weight = weight;
 
 		mixer.timeScale = timeScale;

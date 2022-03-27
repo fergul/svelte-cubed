@@ -1,17 +1,16 @@
 import path from 'path';
 import adapter from '@sveltejs/adapter-static';
-import { preprocess } from './utils/preprocess.js';
+// import { preprocess } from './utils/preprocess.js';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.svelte.md'],
 
-	preprocess,
+	// preprocess,
 
 	kit: {
 		adapter: adapter(),
 
-		target: '#svelte',
 
 		package: {
 			files: (id) => !id.startsWith('site/')
@@ -24,20 +23,12 @@ const config = {
 				}
 			},
 			optimizeDeps: {
-				include: ['svelte-knobby', '@sveltejs/site-kit'],
+				include: ['svelte-knobby'],
 				exclude: ['three']
 			},
 			ssr: {
-				noExternal: ['three', 'svelte-knobby', '@sveltejs/site-kit']
+				noExternal: ['three', 'svelte-knobby']
 			},
-			server: {
-				fs: {
-					allow: [
-						// TODO temporary, so that we can link this package
-						path.resolve('../../sites/packages/site-kit')
-					]
-				}
-			}
 		}
 	}
 };

@@ -4,6 +4,7 @@ export { default as Canvas } from './components/Canvas.svelte';
 export { default as Bone } from './components/objects/Bone.svelte';
 export { default as Group } from './components/objects/Group.svelte';
 export { default as Mesh } from './components/objects/Mesh.svelte';
+export { default as Line } from './components/objects/Line.svelte';
 export { default as Skeleton } from './components/objects/Skeleton.svelte';
 export { default as SkinnedMesh } from './components/objects/SkinnedMesh.svelte';
 export { default as Primitive } from './components/objects/Primitive.svelte';
